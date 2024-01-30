@@ -7,7 +7,8 @@ from PyPDF2 import PdfReader
 
 from presidio_analyzer import AnalyzerEngine
 
-analyzer = AnalyzerEngine()
+def init_analyzer():
+    return AnalyzerEngine()
 
 def find_pii(text):
 
@@ -45,6 +46,8 @@ def main():
 
     st.set_page_config(page_title="Resume Highlighter")
     st.title("Resume Highlighter")
+
+    analyzer = init_analyzer()
 
     # PDF file upload
     pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
