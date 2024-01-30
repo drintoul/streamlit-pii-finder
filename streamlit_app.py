@@ -7,17 +7,39 @@ from PyPDF2 import PdfReader
 
 from presidio_analyzer import AnalyzerEngine
 
+analyzer = AnalyzerEngine()
+
+def find_pii(text):
+
+    results = analyzer.analyze(text=text, entities=[], language='en', score_threshold=0.5)
+
+    pii = {}
+
+    for item in results:
+
+        parsed = str(item).split(',')
+        type = parsed[0].split()[1]
+        start = int(parsed[1].split()[1])
+        end = int(parsed[2].split()[1])
+
+        if type in pii.keys():
+            pii[type].append(text[start:end])
+        else:
+            pii[type] = [text[start:end]]
+
+    return pii
+
 def read_pdf_page(file, page_number):
 
     pdfReader = PdfReader(file)
     page = pdfReader.pages[page_number]
-    return page.extract_text()
+    text = page.extract_text()
 
+    return find_pii(text)
 
 def on_text_area_change():
 
     st.session_state.page_text = st.session_state.my_text_area
-    
 
 def main():
 
