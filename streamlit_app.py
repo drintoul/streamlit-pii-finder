@@ -5,6 +5,8 @@ from pdf2image import convert_from_bytes
 from PIL import Image
 from PyPDF2 import PdfReader
 
+from presidio_analyzer import AnalyzerEngine
+
 def read_pdf_page(file, page_number):
 
     pdfReader = PdfReader(file)
