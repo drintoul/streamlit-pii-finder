@@ -1,2 +1,2 @@
-# pie-finder
+# pii-finder
 Personally Identifiable Information Finder
