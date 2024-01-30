@@ -5,6 +5,7 @@ from pdf2image import convert_from_bytes
 from PIL import Image
 from PyPDF2 import PdfReader
 
+import presidio_analyzer
 from presidio_analyzer import AnalyzerEngine
 
 def init_analyzer():
